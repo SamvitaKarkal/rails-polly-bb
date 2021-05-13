@@ -5,9 +5,8 @@ const NavItem = ({ iconClass, name, path }) => {
   return (
     <Link
       to={path}
-      className="inline-flex items-center px-1 pt-1 mr-3
-      font-semibold text-sm leading-5
-      text-indigo-500 hover:text-indigo-500"
+      className="text-3xl font-bold font-mono inline-flex items-center
+       px-1 pt-1 mr-3 leading-5 text-black hover:text-indigo-500"
     >
       {iconClass && <i className={`${iconClass} text-bb-purple`}></i>}
       {name}
