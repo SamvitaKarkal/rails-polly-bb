@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { all, isNil, isEmpty, either } from "ramda";
+import { isNil, isEmpty, either } from "ramda";
+import { Link } from "react-router-dom";
 
 import Container from "components/Container";
 import ListPolls from "components/Polls/ListPolls";
 import PageLoader from "components/PageLoader";
+import Button from "components/Button";
 import pollsApi from "apis/polls";
 import { setAuthHeaders } from "apis/axios";
+//import Button from "components/Button"
+// import { getFromLocalStorage } from "helpers/storage";
 
 const Dashboard = ({ history }) => {
   const [polls, setPolls] = useState([]);
@@ -23,18 +27,17 @@ const Dashboard = ({ history }) => {
     }
   };
 
-  //   const destroyPoll = async slug => {
-  //     try {
-  //       await pollsApi.destroy(slug);
-  //       await fetchPolls();
-  //     } catch (error) {
-  //       logger.error(error);
-  //     }
-  //   };
-
-  //   const showPoll = slug => {
-  //     history.push(`/polls/${slug}/show`);
-  //   };
+  const createPoll = slug => {
+    history.push(`/polls/create`);
+  };
+  // const destroyPoll = async slug => {
+  //   try {
+  //     await pollsApi.destroy(slug);
+  //     await fetchPolls();
+  //   } catch (error) {
+  //     logger.error(error);
+  //   }
+  // };
 
   //   const updatePoll = slug => {
   //     history.push(`/polls/${slug}/edit`);
@@ -45,32 +48,33 @@ const Dashboard = ({ history }) => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="w-screen h-screen">
-        <PageLoader />
-      </div>
-    );
+    return <PageLoader />;
   }
-
-  if (either(isNil, isEmpty)(polls)) {
-    return (
-      <Container>
-        <h1 className="my-5 text-xl leading-5 text-center">
-          No polls created yet. Be the first to create one!
-        </h1>
-      </Container>
-    );
-  }
-
   return (
     <Container>
-      <h1>Hello World</h1>
-      <ListPolls
-        data={polls}
-        // destroyPoll={destroyPoll}
-        // updatePoll={updatePoll}
-        // showPoll={showPoll}
-      />
+      <div className="flex justify-between items-center">
+        <h1 className="text-indigo-500 text-3xl font-medium font-bold">
+          Polls
+        </h1>
+        <Button
+          type="button"
+          buttonText="Create new poll +"
+          loading={false}
+          onClick={createPoll}
+        />
+      </div>
+      {either(isNil, isEmpty)(polls) ? (
+        <h1 className="text-xl leading-5 text-center mt-4">
+          No polls created yet. Create new one now!
+        </h1>
+      ) : (
+        <ListPolls
+          data={polls}
+          // destroyPoll={destroyPoll}
+          // updatePoll={updatePoll}
+          // showPoll={showPoll}
+        />
+      )}
     </Container>
   );
 };

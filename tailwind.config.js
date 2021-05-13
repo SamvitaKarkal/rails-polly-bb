@@ -16,6 +16,7 @@ module.exports = {
         'bb-green': '#31C48D',
         'bb-yellow': '#F6B100',
         "nitro-gray-800": "#1F2937",
+        "bb-sky" : "#eff5fb"
       },
       boxShadow: {
         "custom-box-shadow": "10px 10px 5px 200px rgba(0,0,0,1)",
