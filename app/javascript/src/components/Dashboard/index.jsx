@@ -8,7 +8,6 @@ import PageLoader from "components/PageLoader";
 import Button from "components/Button";
 import pollsApi from "apis/polls";
 import { setAuthHeaders } from "apis/axios";
-//import Button from "components/Button"
 // import { getFromLocalStorage } from "helpers/storage";
 
 const Dashboard = ({ history }) => {
@@ -21,7 +20,7 @@ const Dashboard = ({ history }) => {
       const response = await pollsApi.list();
       setPolls(response.data.polls);
     } catch (error) {
-      logger.error(error);
+      // logger.error(error);
     } finally {
       setLoading(false);
     }
@@ -39,9 +38,9 @@ const Dashboard = ({ history }) => {
   //   }
   // };
 
-  //   const updatePoll = slug => {
-  //     history.push(`/polls/${slug}/edit`);
-  //   };
+  const showPoll = slug => {
+    history.push(`/tasks/${slug}/show`);
+  };
 
   useEffect(() => {
     fetchPolls();
@@ -72,7 +71,7 @@ const Dashboard = ({ history }) => {
           data={polls}
           // destroyPoll={destroyPoll}
           // updatePoll={updatePoll}
-          // showPoll={showPoll}
+          showPoll={showPoll}
         />
       )}
     </Container>

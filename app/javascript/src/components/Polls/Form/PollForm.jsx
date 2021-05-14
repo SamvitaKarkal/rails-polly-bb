@@ -1,0 +1,68 @@
+import React from "react";
+import Input from "components/Input";
+import Button from "components/Button";
+
+const PollForm = ({
+  type = "create",
+  title,
+  setTitle,
+  options,
+  setOptions,
+  loading,
+  handleSubmit,
+}) => {
+  const handleChange = (e, idx) => {
+    e.preventDefault();
+    setOptions(preState => {
+      const curState = [...preState];
+      curState[idx].option = e.target.value;
+      return curState;
+    });
+  };
+  return (
+    <form className="max-w-lg mx-auto" onSubmit={handleSubmit}>
+      <div className="w-full">
+        <h2>{type === "create" ? "" : { title }}</h2>
+        <Input
+          label="Title"
+          placeholder="enter Title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+      </div>
+      <div className="w-3/4">
+        <Input
+          label="First Option"
+          placeholder="First Option"
+          value={options[0].option}
+          onChange={e => handleChange(e, 0)}
+        />
+        <Input
+          label="Second Option"
+          placeholder="Second Option"
+          value={options[1].option}
+          onChange={e => handleChange(e, 1)}
+        />
+        <Input
+          label="Third Option"
+          placeholder="Third Option"
+          value={options[2].option}
+          onChange={e => handleChange(e, 2)}
+        />
+        <Input
+          label="Third Option"
+          placeholder="Third Option"
+          value={options[3].option}
+          onChange={e => handleChange(e, 3)}
+        />
+      </div>
+      <Button
+        type="submit"
+        buttonText={type === "create" ? "Create Task" : "Update Task"}
+        loading={loading}
+      />
+    </form>
+  );
+};
+
+export default PollForm;
