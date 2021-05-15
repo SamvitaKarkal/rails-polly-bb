@@ -5,9 +5,11 @@ import { ToastContainer } from "react-toastify";
 
 import Dashboard from "components/Dashboard";
 import CreatePoll from "components/Polls/CreatePoll";
+import EditPoll from "components/Polls/EditPoll";
 import PageLoader from "components/PageLoader";
 import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
+import Signup from "components/Authentication/Signup";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -30,11 +32,11 @@ const App = () => {
     <Router>
       <ToastContainer />
       <Switch>
-        {/* <Route exact path="/polls/:slug/edit" component={EditPoll} />*/}
+        <Route exact path="/polls/:slug/edit" component={EditPoll} />
         <Route exact path="/polls/create" component={CreatePoll} />
         <Route exact path="/" component={Dashboard} />
-        {/* <Route exact path="/sign-up" component={SignUp} /> 
-        <Route exact path="/" component={Login} /> */}
+        <Route exact path="/sign-up" component={Signup} />
+        <Route exact path="/" component={Login} />
       </Switch>
     </Router>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "components/Button";
 
 const ListPolls = ({ polls, history, isLoggedIn, destroyPoll }) => {
   const routeHandler = (id, target) => {
@@ -19,20 +20,14 @@ const ListPolls = ({ polls, history, isLoggedIn, destroyPoll }) => {
             </div>
             {isLoggedIn && (
               <div className="col-span-1">
-                <i
-                  className="text-2xl text-center text-bb-border
-                  transition duration-300 ease-in-out
-                  ri-edit-box-line hover:text-blue-500 mx-4"
+                <Button
                   title="Edit"
-                  onClick={() => routeHandler(poll.id, "edit")}
-                ></i>
-                <i
-                  className="text-2xl text-center text-bb-border
-                  transition duration-300 ease-in-out
-                  ri-delete-bin-5-line hover:text-red-600 cursor-pointer"
+                  onClick={() => updatePoll(poll.slug)}
+                ></Button>
+                <Button
                   title="Delete"
                   onClick={() => destroyPoll(poll.id)}
-                ></i>
+                ></Button>
               </div>
             )}
           </div>

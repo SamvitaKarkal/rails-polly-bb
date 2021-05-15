@@ -33,3 +33,6 @@ en:
   poll:
     slug:
       immutable: "is immutable!"
+      
+  successfully_created: "%{entity} was successfully created"
+  response_recorded: "Thanks for Voting"

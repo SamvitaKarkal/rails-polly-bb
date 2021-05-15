@@ -3,6 +3,7 @@ import Container from "components/Container";
 import PollForm from "./Form/PollForm";
 import pollsApi from "apis/polls";
 import PageLoader from "components/PageLoader";
+//import { setAuthHeaders } from "apis/axios";
 // import usersApi from "apis/users";
 
 const CreatePoll = ({ history }) => {

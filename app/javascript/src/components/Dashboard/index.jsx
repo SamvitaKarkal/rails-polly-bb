@@ -12,6 +12,8 @@ import { setAuthHeaders } from "apis/axios";
 
 const Dashboard = ({ history }) => {
   const [polls, setPolls] = useState([]);
+  const authToken = getFromLocalStorage("authToken");
+  const isLoggedIn = !either(isNil, isEmpty)(authToken);
   const [loading, setLoading] = useState(true);
 
   const fetchPolls = async () => {
@@ -20,7 +22,7 @@ const Dashboard = ({ history }) => {
       const response = await pollsApi.list();
       setPolls(response.data.polls);
     } catch (error) {
-      // logger.error(error);
+      logger.error(error);
     } finally {
       setLoading(false);
     }
@@ -29,17 +31,22 @@ const Dashboard = ({ history }) => {
   const createPoll = slug => {
     history.push(`/polls/create`);
   };
-  // const destroyPoll = async slug => {
-  //   try {
-  //     await pollsApi.destroy(slug);
-  //     await fetchPolls();
-  //   } catch (error) {
-  //     logger.error(error);
-  //   }
-  // };
+
+  const destroyPoll = async slug => {
+    try {
+      await pollsApi.destroy(slug);
+      await fetchPolls();
+    } catch (error) {
+      logger.error(error);
+    }
+  };
 
   const showPoll = slug => {
     history.push(`/tasks/${slug}/show`);
+  };
+
+  const updatePoll = slug => {
+    history.push(`/polls/${slug}/edit`);
   };
 
   useEffect(() => {
@@ -55,12 +62,14 @@ const Dashboard = ({ history }) => {
         <h1 className="text-indigo-500 text-3xl font-medium font-bold">
           Polls
         </h1>
-        <Button
-          type="button"
-          buttonText="Create new poll +"
-          loading={false}
-          onClick={createPoll}
-        />
+        {isLoggedIn && (
+          <Button
+            type="button"
+            buttonText="Create new poll +"
+            loading={false}
+            onClick={createPoll}
+          />
+        )}
       </div>
       {either(isNil, isEmpty)(polls) ? (
         <h1 className="text-xl leading-5 text-center mt-4">
@@ -69,9 +78,11 @@ const Dashboard = ({ history }) => {
       ) : (
         <ListPolls
           data={polls}
-          // destroyPoll={destroyPoll}
-          // updatePoll={updatePoll}
+          history={history}
+          isLoggedIn={isLoggedIn}
           showPoll={showPoll}
+          updatePoll={updatePoll}
+          destroyPoll={destroyPoll}
         />
       )}
     </Container>
