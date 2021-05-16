@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { isNil, isEmpty, either } from "ramda";
-import { Link } from "react-router-dom";
+import logger from "js-logger";
 
 import Container from "components/Container";
 import ListPolls from "components/Polls/ListPolls";
@@ -8,7 +8,7 @@ import PageLoader from "components/PageLoader";
 import Button from "components/Button";
 import pollsApi from "apis/polls";
 import { setAuthHeaders } from "apis/axios";
-// import { getFromLocalStorage } from "helpers/storage";
+import { getFromLocalStorage } from "helpers/storage";
 
 const Dashboard = ({ history }) => {
   const [polls, setPolls] = useState([]);

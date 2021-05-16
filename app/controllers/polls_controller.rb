@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  #before_action :authenticate_user_using_x_auth_token, expcet: :index
+  before_action :authenticate_user_using_x_auth_token, except: [:index, :show]
   before_action :load_poll, only: %i[ show update delete]
   before_action :load_options, :load_current_user_response, only: :show
 

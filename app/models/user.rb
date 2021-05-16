@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :poll, dependent: :destroy
   #, foreign_key: :user_id
   has_secure_password
-  #has_secure_token :authentication_token
+  has_secure_token :authentication_token
 
   validates :first_name, presence: true, length: {maximum: 25}
   validates :least_name, presence:true, length: {maximum: 25}

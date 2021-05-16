@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import SignupForm from "Form/SignupForm";
+import SignupForm from "./Form/SignupForm";
 import authApi from "apis/auth";
 
 const Signup = ({ history }) => {

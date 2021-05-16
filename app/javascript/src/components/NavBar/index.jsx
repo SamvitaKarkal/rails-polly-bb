@@ -1,8 +1,13 @@
 import React from "react";
 import NavItem from "./NavItem";
-//import authApi from "apis/auth";
+import authApi from "apis/auth";
+import Toastr from "components/Common/Toastr";
+import { resetAuthTokens } from "src/apis/axios.js";
+import { getFromLocalStorage } from "helpers/storage";
 
 const NavBar = () => {
+  const userName = getFromLocalStorage("authUserName");
+
   return (
     <nav className="bg-white shadow">
       <div className="container px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
