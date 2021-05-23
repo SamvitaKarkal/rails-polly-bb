@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { isNil, isEmpty, either } from "ramda";
-import logger from "js-logger";
 
 import Container from "components/Container";
 import ListPolls from "components/Polls/ListPolls";
@@ -41,9 +40,9 @@ const Dashboard = ({ history }) => {
     }
   };
 
-  const showPoll = slug => {
-    history.push(`/tasks/${slug}/show`);
-  };
+  // const showPoll = slug => {
+  //   history.push(`/polls/${slug}/show`);
+  // };
 
   const updatePoll = slug => {
     history.push(`/polls/${slug}/edit`);
@@ -57,7 +56,9 @@ const Dashboard = ({ history }) => {
     return <PageLoader />;
   }
   return (
-    <Container>
+    <Container
+    // isLoggedIn = {isLoggedIn}
+    >
       <div className="flex justify-between items-center">
         <h1 className="text-indigo-500 text-3xl font-medium font-bold">
           Polls
@@ -77,10 +78,10 @@ const Dashboard = ({ history }) => {
         </h1>
       ) : (
         <ListPolls
-          data={polls}
+          polls={polls}
           history={history}
           isLoggedIn={isLoggedIn}
-          showPoll={showPoll}
+          // showPoll={showPoll}
           updatePoll={updatePoll}
           destroyPoll={destroyPoll}
         />

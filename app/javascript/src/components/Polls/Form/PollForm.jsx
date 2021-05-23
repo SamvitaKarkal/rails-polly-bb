@@ -15,7 +15,7 @@ const PollForm = ({
     e.preventDefault();
     setOptions(preState => {
       const curState = [...preState];
-      curState[idx].option = e.target.value;
+      curState[idx].content = e.target.value;
       return curState;
     });
   };
@@ -34,31 +34,31 @@ const PollForm = ({
         <Input
           label="First Option"
           placeholder="First Option"
-          value={options[0].option}
+          value={options[0].content}
           onChange={e => handleChange(e, 0)}
         />
         <Input
           label="Second Option"
           placeholder="Second Option"
-          value={options[1].option}
+          value={options[1].content}
           onChange={e => handleChange(e, 1)}
         />
         <Input
           label="Third Option"
           placeholder="Third Option"
-          value={options[2].option}
+          value={options[2].content}
           onChange={e => handleChange(e, 2)}
         />
         <Input
-          label="Third Option"
-          placeholder="Third Option"
-          value={options[3].option}
+          label="Fourth Option"
+          placeholder="Fourth Option"
+          value={options[3].content}
           onChange={e => handleChange(e, 3)}
         />
       </div>
       <Button
         type="submit"
-        buttonText={type === "create" ? "Create Task" : "Update Task"}
+        buttonText={type === "create" ? "Create Poll" : "Update Poll"}
         loading={loading}
       />
     </form>

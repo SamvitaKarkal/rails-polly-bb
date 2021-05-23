@@ -1,13 +1,12 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
 
-  has_many :poll, dependent: :destroy
-  #, foreign_key: :user_id
+  has_many :polls, dependent: :destroy, foreign_key: :user_id
   has_secure_password
   has_secure_token :authentication_token
 
   validates :first_name, presence: true, length: {maximum: 25}
-  validates :least_name, presence:true, length: {maximum: 25}
+  validates :last_name, presence:true, length: {maximum: 25}
   validates :email, presence: true,
                     length: {maximum: 255},
                     uniqueness: {case_sensitive: false },

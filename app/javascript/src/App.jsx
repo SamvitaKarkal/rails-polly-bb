@@ -6,6 +6,7 @@ import { either, isEmpty, isNil } from "ramda";
 import Dashboard from "components/Dashboard";
 import CreatePoll from "components/Polls/CreatePoll";
 import EditPoll from "components/Polls/EditPoll";
+import ShowPoll from "components/Polls/ShowPoll";
 import PageLoader from "components/PageLoader";
 import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
@@ -37,16 +38,26 @@ const App = () => {
     <Router>
       <ToastContainer />
       <Switch>
-        <Route exact path="/polls/:slug/edit" component={EditPoll} />
-        <Route exact path="/polls/create" component={CreatePoll} />
         <Route exact path="/" component={Dashboard} />
-        <Route exact path="/sign-up" component={Signup} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute
-          path="/"
+          path="/polls/:slug/show"
           redirectRoute="/login"
           condition={isLoggedIn}
-          component={Dashboard}
+          component={ShowPoll}
+        />
+        <PrivateRoute
+          path="/polls/create"
+          redirectRoute="/login"
+          condition={isLoggedIn}
+          component={CreatePoll}
+        />
+        <PrivateRoute
+          path="/polls/:slug/edit"
+          redirectRoute="/login"
+          condition={isLoggedIn}
+          component={EditPoll}
         />
       </Switch>
     </Router>

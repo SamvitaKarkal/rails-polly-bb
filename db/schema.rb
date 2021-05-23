@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_184334) do
+ActiveRecord::Schema.define(version: 2021_05_17_153016) do
 
   create_table "options", force: :cascade do |t|
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "vote", default: 0
     t.integer "poll_id"
   end
 
@@ -26,6 +25,17 @@ ActiveRecord::Schema.define(version: 2021_05_14_184334) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug", null: false
     t.integer "user_id"
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "poll_id", null: false
+    t.integer "option_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["option_id"], name: "index_responses_on_option_id"
+    t.index ["poll_id"], name: "index_responses_on_poll_id"
+    t.index ["user_id"], name: "index_responses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,4 +51,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_184334) do
 
   add_foreign_key "options", "polls", on_delete: :cascade
   add_foreign_key "polls", "users", on_delete: :cascade
+  add_foreign_key "responses", "options", on_delete: :cascade
+  add_foreign_key "responses", "polls", on_delete: :cascade
+  add_foreign_key "responses", "users", on_delete: :cascade
 end

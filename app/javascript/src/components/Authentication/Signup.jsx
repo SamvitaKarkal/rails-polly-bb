@@ -4,7 +4,8 @@ import SignupForm from "./Form/SignupForm";
 import authApi from "apis/auth";
 
 const Signup = ({ history }) => {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -16,7 +17,8 @@ const Signup = ({ history }) => {
       setLoading(true);
       await authApi.signup({
         user: {
-          name,
+          first_name: firstName,
+          last_name: lastName,
           email,
           password,
           password_confirmation: passwordConfirmation,
@@ -31,7 +33,8 @@ const Signup = ({ history }) => {
   };
   return (
     <SignupForm
-      setName={setName}
+      setFirstName={setFirstName}
+      setLastName={setLastName}
       setEmail={setEmail}
       setPassword={setPassword}
       setPasswordConfirmation={setPasswordConfirmation}

@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 
 import Input from "components/Input";
 import Button from "components/Button";
+
 const SignupForm = ({
   handleSubmit,
-  setName,
+  setFirstName,
+  setLastName,
   setEmail,
   setPassword,
   loading,
@@ -25,7 +27,7 @@ const SignupForm = ({
         </h2>
         <div className="text-center">
           <Link
-            to="/"
+            to="/login"
             className="mt-2 text-sm font-medium text-center
             text-bb-purple transition duration-150 ease-in-out
             focus:outline-none focus:underline"
@@ -35,9 +37,14 @@ const SignupForm = ({
         </div>
         <form className="mt-8" onSubmit={handleSubmit}>
           <Input
-            label="Name"
+            label="First Name"
             placeholder="Oliver"
-            onChange={e => setName(e.target.value)}
+            onChange={e => setFirstName(e.target.value)}
+          />
+          <Input
+            label="Last Name"
+            placeholder="Snow"
+            onChange={e => setLastName(e.target.value)}
           />
           <Input
             type="email"
