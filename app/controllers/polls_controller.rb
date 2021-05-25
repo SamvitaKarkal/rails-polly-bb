@@ -1,7 +1,7 @@
 class PollsController < ApplicationController
   #after_action :verify_authorized, except: :index
   before_action :authenticate_user_using_x_auth_token, except: :index
-  before_action :load_poll, only: %i[ show update destroy]
+  before_action :load_poll, only: %i[show update destroy]
   before_action :load_options, :load_current_user_response, only: :show
 
   def index
@@ -62,8 +62,8 @@ class PollsController < ApplicationController
 
   def load_poll
     @poll = Poll.find_by_slug!(params[:slug])
-    render json: {error:  @url.errors.full_messages.to_sentence} unless @poll
-  rescue ActiveRecord::RecordNotFound => e
+    render json: {error: @url.errors.full_messages.to_sentence} unless @poll
+    rescue ActiveRecord::RecordNotFound => e
     render json: { error: e }, status: :not_found
   end
 
@@ -73,7 +73,7 @@ class PollsController < ApplicationController
   end
 
   def load_current_user_response
-    @current_user_response = Response.find_by(user: @current_user.id , poll: @poll.slug)
+    @current_user_response = Response.find_by(user: @current_user.id , poll: @poll.id)
   end
 
   def load_options
