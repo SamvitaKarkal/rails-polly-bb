@@ -6,8 +6,8 @@ import PageLoader from "components/PageLoader";
 
 const CreatePoll = ({ history }) => {
   const [title, setTitle] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState();
+  const [loading, setLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(false);
   const [options, setOptions] = useState([
     { content: "" },
     { content: "" },

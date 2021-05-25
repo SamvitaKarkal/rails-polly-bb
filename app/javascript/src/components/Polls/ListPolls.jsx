@@ -19,14 +19,14 @@ const ListPolls = ({ polls, history, isLoggedIn, updatePoll, destroyPoll }) => {
               >
                 {poll.title}
               </div>
-              <div className="col-span-2">
+              {/* <div className="col-span-2">
                 <Button
                   type="button"
                   buttonText="Edit"
                   onClick={() => updatePoll(poll.slug)}
                 />
-              </div>
-              <div className="col-span-2">
+              </div> */}
+              <div className="col-span-4">
                 <Button
                   type="button"
                   buttonText="Delete"

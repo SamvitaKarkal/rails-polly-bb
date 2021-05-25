@@ -9,11 +9,10 @@ import Toastr from "components/Common/Toastr";
 
 const EditPoll = ({ history }) => {
   const [title, setTitle] = useState("");
-  const [userId, setUserId] = useState("");
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState(["", "", "", ""]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -24,7 +23,6 @@ const EditPoll = ({ history }) => {
           poll: {
             title,
             option_attributes: options,
-            user_id: userId,
           },
         },
       });
@@ -40,9 +38,9 @@ const EditPoll = ({ history }) => {
   const fetchPollDetails = async () => {
     try {
       const response = await pollsApi.show(slug);
+      const opt = response.data.options?.map(option => option.content);
       setTitle(response.data.poll.title);
-      setUserId(response.data.poll.user_id);
-      setOptions(response.data.options);
+      setOptions(opt);
     } catch (error) {
       logger.error(error);
     } finally {
