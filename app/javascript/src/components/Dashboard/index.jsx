@@ -40,10 +40,6 @@ const Dashboard = ({ history }) => {
     }
   };
 
-  // const showPoll = slug => {
-  //   history.push(`/polls/${slug}/show`);
-  // };
-
   const updatePoll = slug => {
     history.push(`/polls/${slug}/edit`);
   };
