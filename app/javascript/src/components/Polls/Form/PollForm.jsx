@@ -3,7 +3,7 @@ import Input from "components/Input";
 import Button from "components/Button";
 
 const PollForm = ({
-  type = "create",
+  type,
   title,
   setTitle,
   options,

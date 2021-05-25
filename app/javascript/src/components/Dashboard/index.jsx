@@ -27,7 +27,7 @@ const Dashboard = ({ history }) => {
     }
   };
 
-  const createPoll = slug => {
+  const createPoll = () => {
     history.push(`/polls/create`);
   };
 
@@ -56,9 +56,7 @@ const Dashboard = ({ history }) => {
     return <PageLoader />;
   }
   return (
-    <Container
-    // isLoggedIn = {isLoggedIn}
-    >
+    <Container>
       <div className="flex justify-between items-center">
         <h1 className="text-indigo-500 text-3xl font-medium font-bold">
           Polls

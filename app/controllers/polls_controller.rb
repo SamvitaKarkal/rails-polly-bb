@@ -1,7 +1,7 @@
 class PollsController < ApplicationController
   #after_action :verify_authorized, except: :index
   before_action :authenticate_user_using_x_auth_token, except: :index
-  before_action :load_poll, only: %i[ show update delete]
+  before_action :load_poll, only: %i[ show update destroy]
   before_action :load_options, :load_current_user_response, only: :show
 
   def index
@@ -22,32 +22,23 @@ class PollsController < ApplicationController
   end
 
   def show
-    render status: :ok, json: { poll: poll.as_json(include: {
-        options: {
-          only: [:content]
-        }
-      })
-    }
+    response_options = @options
+    user_response_option_id = nil
+    if(@current_user_response)
+      total_responses = Response.where(poll: @poll.id).length
+      user_response_option_id = @current_user_response.option_id
+      response_options =[]
+      @options.each do |option| 
+        option_responses = Response.where(option: option.id).length
+        response_option = option.attributes
+        response_option[:response_percentage] = option_responses * 100 / total_responses
+        response_options.push(response_option)
+      end
+    end
+    render status: :ok, json:{
+      user_response_option_id:  user_response_option_id , poll: @poll, options: response_options
+    }    
   end
-
-  # def show
-  #   response_options = @options
-  #   user_response_option_id = nil
-  #   if(@current_user_response)
-  #     total_responses = Response.where(poll: @poll.id).length
-  #     user_response_option_id = @current_user_response.option_id
-  #     response_options =[]
-  #     @options.each do |option| 
-  #       option_responses = Response.where(option: option.id).length
-  #       response_option = option.attributes
-  #       response_option[:response_percentage] = option_responses * 100 / total_responses
-  #       response_options.push(response_option)
-  #     end
-  #   end
-  #   render status: :ok, json:{
-  #     user_response_option_id:  user_response_option_id , poll: @poll, options: response_options
-  #   }    
-  # end
 
   def update
     if @poll.update(poll_params)
@@ -71,8 +62,9 @@ class PollsController < ApplicationController
 
   def load_poll
     @poll = Poll.find_by_slug!(params[:slug])
-    rescue ActiveRecord::RecordNotFound => e
-      render json: { errors: e }, status: :not_found
+    render json: {error:  @url.errors.full_messages.to_sentence} unless @poll
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { error: e }, status: :not_found
   end
 
   def poll_params
@@ -85,7 +77,7 @@ class PollsController < ApplicationController
   end
 
   def load_options
-    @options = Option.where(polls :@poll.slug)
+    @options = Option.where(polls: @poll.id)
   end
 
 end

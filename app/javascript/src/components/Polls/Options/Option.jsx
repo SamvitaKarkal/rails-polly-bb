@@ -9,7 +9,8 @@ const Option = ({ id, content, response, selectOption, votesPercentage }) => {
     >
       <div
         className={classnames("flex justify-between items-center h-12 p-2", {
-          "bg-gray-300 hover:bg-gray-600 cursor-pointer": !response,
+          "bg-gray-300 hover:bg-gray-600 rounded-full cursor-pointer":
+            !response,
         })}
         style={
           response

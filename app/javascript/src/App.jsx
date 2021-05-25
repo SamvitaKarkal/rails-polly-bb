@@ -8,6 +8,7 @@ import CreatePoll from "components/Polls/CreatePoll";
 import EditPoll from "components/Polls/EditPoll";
 import ShowPoll from "components/Polls/ShowPoll";
 import PageLoader from "components/PageLoader";
+import NavBar from "components/NavBar";
 import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
 import Login from "components/Authentication/Login";
@@ -37,6 +38,7 @@ const App = () => {
   return (
     <Router>
       <ToastContainer />
+      <NavBar isLoggedIn={isLoggedIn} />
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <Route exact path="/signup" component={Signup} />

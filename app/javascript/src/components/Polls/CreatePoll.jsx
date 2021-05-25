@@ -7,7 +7,7 @@ import PageLoader from "components/PageLoader";
 const CreatePoll = ({ history }) => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState();
   const [options, setOptions] = useState([
     { content: "" },
     { content: "" },
@@ -36,6 +36,7 @@ const CreatePoll = ({ history }) => {
   return (
     <Container>
       <PollForm
+        type="create"
         title={title}
         setTitle={setTitle}
         options={options}

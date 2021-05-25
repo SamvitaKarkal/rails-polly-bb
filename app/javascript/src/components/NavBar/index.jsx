@@ -1,13 +1,16 @@
 import React from "react";
 import NavItem from "./NavItem";
 import authApi from "apis/auth";
+//import { isNil, isEmpty, either } from "ramda";
 import { resetAuthTokens } from "src/apis/axios.js";
 import { getFromLocalStorage, setToLocalStorage } from "helpers/storage";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-//const NavBar = ({ isLoggedIn }) => {
-const NavBar = () => {
+//const NavBar = () => {
+const NavBar = ({ isLoggedIn }) => {
   const userName = getFromLocalStorage("authUserName");
+  //const authToken = getFromLocalStorage("authToken");
+  //const isLoggedIn = !either(isNil, isEmpty)(authToken);
 
   const handleLogout = async () => {
     try {
@@ -34,42 +37,42 @@ const NavBar = () => {
               <NavItem name="Polly" path="/" />
             </div>
           </div>
-          {/* {isLoggedIn ? ( */}
-          <div className="flex items-center justify-end">
-            <span
-              className="inline-flex items-center px-2 pt-1 text-sm 
+          {isLoggedIn ? (
+            <div className="flex items-center justify-end">
+              <span
+                className="inline-flex items-center px-2 pt-1 text-lg
               font-regular leading-5 text-bb-gray-600 text-opacity-50
               transition duration-150 ease-in-out border-b-2 
               border-transparent focus:outline-none
-              focus:text-bb-gray-900 text-l"
-            >
-              {userName}
-            </span>
-            <a
-              onClick={handleLogout}
-              className="inline-flex items-center px-1 pt-1 text-sm
+              focus:text-bb-gray-900"
+              >
+                {userName}
+              </span>
+              <a
+                onClick={handleLogout}
+                className="inline-flex items-center px-1 pt-1 text-lg
               font-semibold leading-5 text-bb-gray-600 text-opacity-50
               transition duration-150 ease-in-out border-b-2
               border-transparent hover:text-bb-gray-600 focus:outline-none
-              focus:text-bb-gray-700 cursor-pointer text-xl"
-            >
-              LogOut
-            </a>
-          </div>
-          {/* ) : (
-          <div className="flex items-center justify-end gap-x-4">
-            <Link
-            to="/login"
-            className="inline-flex items-center px-1 pt-1 text-sm
+              focus:text-bb-gray-700 cursor-pointer"
+              >
+                LogOut
+              </a>
+            </div>
+          ) : (
+            <div className="flex items-center justify-end gap-x-4">
+              <Link
+                to="/login"
+                className="inline-flex items-center px-1 pt-1 text-sm
             font-semibold leading-5 text-bb-gray-600 text-opacity-50
             transition duration-150 ease-in-out border-b-2
             border-transparent hover:text-bb-gray-600 focus:outline-none
             focus:text-bb-gray-700 cursor-pointer text-xl"
-            >
-            LogIn
-            </Link>
-          </div>
-          )} */}
+              >
+                LogIn
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

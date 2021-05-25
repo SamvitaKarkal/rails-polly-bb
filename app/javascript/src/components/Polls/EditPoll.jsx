@@ -13,20 +13,27 @@ const EditPoll = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
+  const [options, setOptions] = useState([]);
 
   const handleSubmit = async event => {
     event.preventDefault();
     try {
       await pollsApi.update({
         slug,
-        payload: { poll: { title, user_id: userId } },
+        payload: {
+          poll: {
+            title,
+            option_attributes: options,
+            user_id: userId,
+          },
+        },
       });
-      setLoading(false);
       Toastr.success("Successfully updated poll.");
       history.push("/");
     } catch (error) {
-      setLoading(false);
       logger.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,7 +42,7 @@ const EditPoll = ({ history }) => {
       const response = await pollsApi.show(slug);
       setTitle(response.data.poll.title);
       setUserId(response.data.poll.user_id);
-      setOptions(response.data.poll.options);
+      setOptions(response.data.options);
     } catch (error) {
       logger.error(error);
     } finally {
