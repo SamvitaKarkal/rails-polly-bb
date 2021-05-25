@@ -12,7 +12,7 @@ const EditPoll = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState(["", "", "", ""]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -38,9 +38,9 @@ const EditPoll = ({ history }) => {
   const fetchPollDetails = async () => {
     try {
       const response = await pollsApi.show(slug);
-      //console.log(response.data.options);
+      const opt = response.data.options?.map(option => option.content);
       setTitle(response.data.poll.title);
-      setOptions(response.data.options);
+      setOptions(opt);
     } catch (error) {
       logger.error(error);
     } finally {
