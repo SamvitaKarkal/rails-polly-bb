@@ -59,7 +59,7 @@ const PollForm = ({
       <Button
         type="submit"
         buttonText={type === "create" ? "Create Poll" : "Update Poll"}
-        loading={loading}
+        loading={false}
       />
     </form>
   );
