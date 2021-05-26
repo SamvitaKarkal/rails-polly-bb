@@ -7,9 +7,10 @@
 
 # Polls Handler
 
-    Learning the opinions of your customers to know what may sell better is one of the most crucial part of keeping your business up. So, here is a quick app to help you with it. 
+   Learning the opinions of your customers to know what may sell better is one of the most crucial part of keeping your business up. So, here is a quick app to help you with it. 
 
-    Check out our Polly app that can help you out with it. An easy polls generator app for the needfull.
+   Check out our Polly app that can help you out with it. An easy polls generator app for the needfull.
+
 
 Things you may want to cover:
 
