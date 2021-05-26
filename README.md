@@ -1,9 +1,9 @@
 # README
 
-[![samvitakarkal]](https://circleci.com/gh/samvitakarkal/rails-polly-bb.svg?style=svg)](https://circleci.com/gh/samvitakarkal/rails-polly-bb)
+[![SamvitaSarkal]](https://circleci.com/gh/SamvitaSarkal/rails-polly-bb.svg?style=shield)](https://circleci.com/gh/SamvitaKarkal/rails-polly-bb)
 <br/>
 
-#[Polly](https://rails-polly-bb.herokuapp.com/)
+# [Polly](https://rails-polly-bb.herokuapp.com/)
 
 # Polls Handler
 
