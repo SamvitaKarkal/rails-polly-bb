@@ -1,6 +1,6 @@
 # README
 
-[![SamvitaKarkal](https://circleci.com/gh/SamvitaSarkal/rails-polly-bb.svg?style=shield)](https://circleci.com/gh/SamvitaKarkal/rails-polly-bb)
+[![SamvitaKarkal](https://circleci.com/gh/SamvitaKarkal/rails-polly-bb.svg?style=shield)](https://circleci.com/gh/SamvitaKarkal/rails-polly-bb)
 <br/>
 
 # [Polly](https://rails-polly-bb.herokuapp.com/)
