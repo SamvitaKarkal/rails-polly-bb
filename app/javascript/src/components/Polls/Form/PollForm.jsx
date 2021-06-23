@@ -22,7 +22,7 @@ const PollForm = ({
   return (
     <form className="max-w-lg mx-auto" onSubmit={handleSubmit}>
       <div className="w-full">
-        <h2>{type === "create" ? "" : { title }}</h2>
+        <h2>{type === "create" ? "" : title}</h2>
         <Input
           label="Title"
           placeholder="enter Title"

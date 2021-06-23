@@ -40,7 +40,7 @@ const Dashboard = ({ history }) => {
     }
   };
 
-  const updatePoll = slug => {
+  const updatePoll = async slug => {
     history.push(`/polls/${slug}/edit`);
   };
 
