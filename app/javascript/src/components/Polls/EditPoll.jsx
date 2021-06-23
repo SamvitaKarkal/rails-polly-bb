@@ -5,14 +5,13 @@ import Container from "components/Container";
 import PollForm from "./Form/PollForm";
 import pollsApi from "apis/polls";
 import PageLoader from "components/PageLoader";
-import Toastr from "components/Common/Toastr";
 
 const EditPoll = ({ history }) => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
-  const [options, setOptions] = useState(["", "", "", ""]);
+  const [options, setOptions] = useState([]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -26,7 +25,6 @@ const EditPoll = ({ history }) => {
           },
         },
       });
-      Toastr.success("Successfully updated poll.");
       history.push("/");
     } catch (error) {
       logger.error(error);
@@ -38,9 +36,9 @@ const EditPoll = ({ history }) => {
   const fetchPollDetails = async () => {
     try {
       const response = await pollsApi.show(slug);
-      const opt = response.data.options?.map(option => option.content);
+      //const opt = response.data.options?.map(option => option.content);
       setTitle(response.data.poll.title);
-      setOptions(opt);
+      setOptions(response.data.options);
     } catch (error) {
       logger.error(error);
     } finally {
